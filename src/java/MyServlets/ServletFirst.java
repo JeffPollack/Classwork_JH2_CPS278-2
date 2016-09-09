@@ -41,21 +41,30 @@ public class ServletFirst extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-                        out.println("<h1>Welcome</h1>");
+            out.println("<h1>Welcome</h1>");
             out.println("Here is the information we collected from you");
             
             String fullName = request.getParameter("fullName");
             String wccStudent = request.getParameter("wccStudent");
             String gender = request.getParameter("gender");
             String classYear = request.getParameter("classYear");
-            String properties = request.getParameter("properties");
+            String[] properties = request.getParameterValues("properties");
             String information = request.getParameter("information");
             
             out.println("<p>your full name is: " + fullName);
-            out.println("<p>The answer to whether you are a WCC student is: " + wccStudent);
-            out.println("<p>Your gender is " + gender);
+            if (wccStudent != null)
+            {
+                out.println("<p>The answer to whether you are a WCC student is: " + wccStudent);
+            }
+            if (gender != null)
+                out.println("<p>Your gender is " + gender);
             out.println("<p>Your class year is: " + classYear);
-            out.println("<p>Your properties are: " + properties);
+            if (properties != null && properties.length > 0)
+            {
+                out.println("<p>Your properties are: ");
+                for (int i=0; i < properties.length; i++)
+                    out.println(" " + properties[i]);
+            }
             out.println("<p>Your extra information is: " + information);
             
                         
